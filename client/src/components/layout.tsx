@@ -11,10 +11,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/">
-            <a className="flex items-center gap-2 text-2xl font-bold text-primary">
+            <Button variant="ghost" className="flex items-center gap-2 text-2xl font-bold text-primary p-0 h-auto">
               <MdHotel className="h-6 w-6" />
               <span>AfriStays</span>
-            </a>
+            </Button>
           </Link>
 
           <div className="flex items-center gap-4">
