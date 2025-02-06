@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { searchSchema, insertBookingSchema } from "@shared/schema";
+import { searchSchema, insertBookingSchema, insertHotelSchema } from "@shared/schema";
 import { setupAuth } from "./auth";
 
 export function registerRoutes(app: Express): Server {
@@ -29,6 +29,21 @@ export function registerRoutes(app: Express): Server {
     const query = searchSchema.parse(req.query);
     const hotels = await storage.searchHotels(query.location);
     res.json(hotels);
+  });
+
+  app.post("/api/hotels", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Please login to list a property" });
+    }
+    if (!req.user!.isHotelOwner) {
+      return res.status(403).json({ message: "Only hotel owners can list properties" });
+    }
+    const hotel = insertHotelSchema.parse({
+      ...req.body,
+      ownerId: req.user!.id,
+    });
+    const created = await storage.createHotel(hotel);
+    res.status(201).json(created);
   });
 
   app.post("/api/bookings", async (req, res) => {

@@ -14,6 +14,7 @@ export interface IStorage {
   getFeaturedHotels(): Promise<Hotel[]>;
   searchHotels(location?: string): Promise<Hotel[]>;
   createBooking(booking: InsertBooking): Promise<Booking>;
+  createHotel(hotel: InsertHotel): Promise<Hotel>;
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
@@ -50,6 +51,11 @@ export class DatabaseStorage implements IStorage {
     return results.filter(hotel => 
       hotel.location.toLowerCase().includes(lowercaseLocation)
     );
+  }
+
+  async createHotel(hotel: InsertHotel): Promise<Hotel> {
+    const [created] = await db.insert(hotels).values(hotel).returning();
+    return created;
   }
 
   async createBooking(booking: InsertBooking): Promise<Booking> {
