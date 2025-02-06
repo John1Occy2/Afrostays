@@ -24,7 +24,7 @@ import { apiRequest } from "@/lib/queryClient";
 export default function BookingPage() {
   const { id } = useParams();
   const { toast } = useToast();
-  
+
   const { data: hotel } = useQuery<Hotel>({
     queryKey: [`/api/hotels/${id}`],
   });
@@ -59,7 +59,7 @@ export default function BookingPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-xl">
       <h1 className="text-3xl font-bold mb-8">Book Your Stay</h1>
-      
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -81,7 +81,7 @@ export default function BookingPage() {
                     <Calendar
                       mode="single"
                       selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date) => field.onChange(date?.toISOString())}
+                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString())}
                       initialFocus
                     />
                   </PopoverContent>
@@ -109,7 +109,7 @@ export default function BookingPage() {
                     <Calendar
                       mode="single"
                       selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date) => field.onChange(date?.toISOString())}
+                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString())}
                       initialFocus
                     />
                   </PopoverContent>

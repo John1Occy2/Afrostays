@@ -26,7 +26,7 @@ export default function HotelPage() {
         <div>
           <Carousel className="w-full">
             <CarouselContent>
-              {hotel.images.map((image, index) => (
+              {hotel.images.map((image: string, index: number) => (
                 <CarouselItem key={index}>
                   <img
                     src={image}
@@ -47,7 +47,7 @@ export default function HotelPage() {
           <div className="mb-6">
             <h3 className="font-semibold mb-2">Amenities</h3>
             <div className="flex flex-wrap gap-2">
-              {hotel.amenities.map((amenity) => (
+              {hotel.amenities.map((amenity: string) => (
                 <span
                   key={amenity}
                   className="bg-accent/10 text-accent px-3 py-1 rounded-full"
