@@ -3,7 +3,7 @@ import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import type { Hotel } from "@shared/schema";
+import type { Hotel } from "../../shared/schema";
 
 export default function HotelPage() {
   const { id } = useParams();

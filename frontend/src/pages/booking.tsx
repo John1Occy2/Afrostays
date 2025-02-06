@@ -81,7 +81,7 @@ export default function BookingPage() {
                     <Calendar
                       mode="single"
                       selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString())}
+                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString() || '')}
                       initialFocus
                     />
                   </PopoverContent>
@@ -109,7 +109,7 @@ export default function BookingPage() {
                     <Calendar
                       mode="single"
                       selected={field.value ? new Date(field.value) : undefined}
-                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString())}
+                      onSelect={(date: Date | undefined) => field.onChange(date?.toISOString() || '')}
                       initialFocus
                     />
                   </PopoverContent>

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { SearchBar } from "@/components/search-bar";
 import { HotelCard } from "@/components/hotel-card";
-import type { Hotel } from "@shared/schema";
+import type { Hotel } from "../../shared/schema";
 
 export default function Home() {
   const { data: hotels, isLoading } = useQuery<Hotel[]>({

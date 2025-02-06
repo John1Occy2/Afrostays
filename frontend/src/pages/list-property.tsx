@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertHotelSchema } from "@shared/schema";
+import { insertHotelSchema } from "../../shared/schema";
 import { useAuth } from "@/hooks/use-auth";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import type { InsertHotel } from "@shared/schema";
+import type { InsertHotel } from "../../shared/schema";
 
 export default function ListPropertyPage() {
   const { user } = useAuth();
