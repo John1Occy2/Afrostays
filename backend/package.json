@@ -4,12 +4,13 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
-    "build": "tsc",
+    "build": "tsc && cp package.json dist/",
     "start": "node dist/index.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
     "connect-pg-simple": "^10.0.0",
+    "cors": "^2.8.5",
     "drizzle-orm": "^0.39.1",
     "drizzle-zod": "^0.7.0",
     "express": "^4.21.2",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@types/connect-pg-simple": "^7.0.3",
+    "@types/cors": "^2.8.13",
     "@types/express": "4.17.21",
     "@types/express-session": "^1.18.0",
     "@types/node": "20.16.11",

@@ -7,12 +7,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Configure CORS
+// Configure CORS based on environment
+const corsOrigin = process.env.NODE_ENV === 'production' 
+  ? process.env.CORS_ORIGIN 
+  : "http://localhost:3000";
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: corsOrigin,
   credentials: true
 }));
 
+// Logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -53,7 +58,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, "0.0.0.0", () => {
-  log(`Server running on port ${PORT}`);
+const PORT = parseInt(process.env.PORT || "3000", 10);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
