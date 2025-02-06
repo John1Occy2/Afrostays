@@ -38,6 +38,7 @@ export const bookings = pgTable("bookings", {
   totalPrice: integer("total_price").notNull(),
 });
 
+// Schema validation
 export const insertUserSchema = createInsertSchema(users).omit({ id: true, createdAt: true });
 export const insertHotelSchema = createInsertSchema(hotels).omit({ id: true });
 export const insertBookingSchema = createInsertSchema(bookings).omit({ id: true });
@@ -49,6 +50,7 @@ export const searchSchema = z.object({
   guests: z.number().optional(),
 });
 
+// Type exports
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type Hotel = typeof hotels.$inferSelect;
