@@ -2,8 +2,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { searchSchema, insertBookingSchema } from "@shared/schema";
+import { setupAuth } from "./auth";
 
 export function registerRoutes(app: Express): Server {
+  setupAuth(app);
+
   app.get("/api/hotels", async (_req, res) => {
     const hotels = await storage.getHotels();
     res.json(hotels);
@@ -29,7 +32,13 @@ export function registerRoutes(app: Express): Server {
   });
 
   app.post("/api/bookings", async (req, res) => {
-    const booking = insertBookingSchema.parse(req.body);
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Please login to make a booking" });
+    }
+    const booking = insertBookingSchema.parse({
+      ...req.body,
+      userId: req.user!.id,
+    });
     const created = await storage.createBooking(booking);
     res.status(201).json(created);
   });
